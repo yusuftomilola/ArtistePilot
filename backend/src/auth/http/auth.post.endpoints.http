@@ -1,0 +1,33 @@
+// CREATE A SINGLE NEW USER
+POST http://localhost:4000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "firstName": "Yusuf",
+    "lastName": "Falade",
+    "email": "faladeyusuf54@gmail.com",
+    "password": "Adetomi.544$$"
+}
+
+// LOGIN USER
+POST http://localhost:4000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "faladeyusuf54@gmail.com",
+    "password": "Adetomi.544$$"
+}
+
+// VERIFY EMAIL
+POST http://localhost:4000/api/v1/auth/verify-email
+Content-Type: application/json
+
+{
+    "token": "jp4kv8l6l6kyckhi23seig",
+    "userId": "e5d14e41-ed76-40ad-8f0b-798a94efb708"
+}
+
+// RESEND VERIFICATION EMAIL
+POST http://localhost:4000/api/v1/auth/resend-verify-email
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImVtYWlsIjoiZmFsYWRleXVzdWY1NEBnbWFpbC5jb20iLCJpYXQiOjE3NTIyNDI4NjksImV4cCI6MTc1MjI0NjQ2OSwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.qSTNthlJl5QRrhQYFI1BPaCCQl7YwnB6Yf3oKTcD1do
+

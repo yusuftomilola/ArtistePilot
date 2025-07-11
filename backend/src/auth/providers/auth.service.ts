@@ -4,6 +4,9 @@ import { VerifyEmailDto } from 'src/users/dto/verifyEmail.dto';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/providers/users.service';
 import { ValidateUserProvider } from './validateUser.provider';
+import { LoginUserProvider } from './loginUser.provider';
+import { LoginUserDto } from '../dto/loginUser.dto';
+import { Request } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -12,11 +15,23 @@ export class AuthService {
     private readonly usersService: UsersService,
 
     private readonly validateUserProvider: ValidateUserProvider,
+
+    private readonly loginUserProvider: LoginUserProvider,
   ) {}
 
   // CREATE A NEW USER
   public async createSinlgeUser(createUserDto: CreateUserDto) {
     return await this.usersService.createSingleUser(createUserDto);
+  }
+
+  // LOGIN USER
+  public async loginUser(loginUserDto: LoginUserDto, user: User, req: Request) {
+    return await this.loginUserProvider.loginUser(loginUserDto, user, req);
+  }
+
+  // VALIDATE USER
+  public async validateUser(email: string, password: string) {
+    return await this.validateUserProvider.validateUser(email, password);
   }
 
   // VERIFY EMAIL
@@ -27,10 +42,5 @@ export class AuthService {
   // RESEND VERIFY EMAIL
   public async ResendVerifyEmail(user: User) {
     return await this.usersService.resendVerifyEmail(user);
-  }
-
-  // VALIDATE USER
-  public async validateUser(email: string, password: string) {
-    return await this.validateUserProvider.validateUser(email, password);
   }
 }
