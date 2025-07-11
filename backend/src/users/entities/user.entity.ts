@@ -1,9 +1,12 @@
 import { Exclude } from 'class-transformer';
+import { RefreshTokenEntity } from 'src/auth/entities/refreshToken.entity';
+import { UserRole } from 'src/auth/enums/roles.enum';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -39,6 +42,17 @@ export class User {
   })
   @Exclude()
   password: string;
+
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
+  })
+  role: UserRole;
+
+  @OneToMany(() => RefreshTokenEntity, (token) => token.user)
+  @Exclude()
+  refreshToken: RefreshTokenEntity[];
 
   @Column({
     default: false,
