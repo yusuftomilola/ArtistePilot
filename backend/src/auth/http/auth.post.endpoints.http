@@ -29,5 +29,43 @@ Content-Type: application/json
 
 // RESEND VERIFICATION EMAIL
 POST http://localhost:4000/api/v1/auth/resend-verify-email
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImVtYWlsIjoiZmFsYWRleXVzdWY1NEBnbWFpbC5jb20iLCJpYXQiOjE3NTIyNDI4NjksImV4cCI6MTc1MjI0NjQ2OSwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.qSTNthlJl5QRrhQYFI1BPaCCQl7YwnB6Yf3oKTcD1do
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImVtYWlsIjoiZmFsYWRleXVzdWY1NEBnbWFpbC5jb20iLCJpYXQiOjE3NTIyNDgzMjQsImV4cCI6MTc1MjI1MTkyNCwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.7WZFCi6ZEC2yl928QpiSVO8erlnwdSi4ZMCj8imK1zo
 
+// REFRESH TOKEN - GET AN ACCESS TOKEN USING THE REFRESH TOKEN
+POST http://localhost:4000/api/v1/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImlhdCI6MTc1MjI0ODMyNCwiZXhwIjoxNzUyMzM0NzI0LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.ty55UyVfk66f2hZtL5NCkgSVMVpsCZlPb9_LalpxPdo"
+}
+
+// LOG OUT
+POST http://localhost:4000/api/v1/auth/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImVtYWlsIjoiZmFsYWRleXVzdWY1NEBnbWFpbC5jb20iLCJpYXQiOjE3NTIyNDgzMjQsImV4cCI6MTc1MjI1MTkyNCwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.7WZFCi6ZEC2yl928QpiSVO8erlnwdSi4ZMCj8imK1zo
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImlhdCI6MTc1MjI0ODMyNCwiZXhwIjoxNzUyMzM0NzI0LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.ty55UyVfk66f2hZtL5NCkgSVMVpsCZlPb9_LalpxPdo"
+}
+
+// LOG OUT ALL DEVICES/SESSIONS
+POST http://localhost:4000/api/v1/auth/logout-all-sessions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImVtYWlsIjoiZmFsYWRleXVzdWY1NEBnbWFpbC5jb20iLCJpYXQiOjE3NTIyNDgzMjQsImV4cCI6MTc1MjI1MTkyNCwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.7WZFCi6ZEC2yl928QpiSVO8erlnwdSi4ZMCj8imK1zo
+
+// FORGOT PASSWORD
+POST http://localhost:4000/api/v1/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email": "tomilolaaaaa@gmail.com"
+}
+
+// RESET PASSWORD
+POST http://localhost:4000/api/v1/auth/reset-password
+Content-Type: application/json
+
+{
+    "email": "tomilolaaaaa@gmail.com",
+    "token": "b3ee64ffhbuih97kul284j",
+    "password": "Opeyemi.544$$"
+}

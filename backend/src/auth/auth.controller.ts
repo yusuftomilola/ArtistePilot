@@ -16,6 +16,10 @@ import { LocalAuthGuard } from './guards/localAuth.guard';
 import { LoginUserDto } from './dto/loginUser.dto';
 import { Request } from 'express';
 import { IsPublic } from './decorators/public.decorator';
+import { RefreshTokenGuard } from './guards/refreshToken.guard';
+import { RefreshTokenDto } from './dto/refreshToken.dto';
+import { ForgotPasswordDto } from './dto/forgotPassword.dto';
+import { ResetPasswordDto } from './dto/resetPassword.dto';
 
 @Controller('api/v1/auth')
 export class AuthController {
@@ -55,5 +59,51 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   public async resendVerifyEmail(@GetUser() user: User) {
     return await this.authService.ResendVerifyEmail(user);
+  }
+
+  // REFRESH TOKEN
+  @IsPublic()
+  @Post('refresh-token')
+  @UseGuards(RefreshTokenGuard)
+  @HttpCode(HttpStatus.OK)
+  public async refreshToken(
+    @Body() refreshTokenDto: RefreshTokenDto,
+    @GetUser() user: User,
+    @Req() req: Request,
+  ) {
+    return await this.authService.refreshToken(refreshTokenDto, user.id, req);
+  }
+
+  // LOG OUT
+  @Post('logout')
+  @HttpCode(HttpStatus.OK)
+  public async logout(
+    @GetUser() user: User,
+    @Body() refreshTokenDto: RefreshTokenDto,
+  ) {
+    return await this.authService.logout(user.id, refreshTokenDto.refreshToken);
+  }
+
+  // LOG OUT ALL SESSIONS
+  @Post('logout-all-sessions')
+  @HttpCode(HttpStatus.OK)
+  public async logoutAllSessions(@GetUser() user: User) {
+    return this.authService.logoutAllSessions(user.id);
+  }
+
+  // FORGOT PASSWORD
+  @IsPublic()
+  @Post('forgot-password')
+  @HttpCode(HttpStatus.OK)
+  public async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
+    return await this.authService.forgotPassword(forgotPasswordDto);
+  }
+
+  // RESET PASSWORD
+  @IsPublic()
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  public async resetpassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    return await this.authService.resetPassword(resetPasswordDto);
   }
 }

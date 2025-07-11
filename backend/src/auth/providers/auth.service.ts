@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/createUser.dto';
 import { VerifyEmailDto } from 'src/users/dto/verifyEmail.dto';
 import { User } from 'src/users/entities/user.entity';
@@ -7,6 +12,12 @@ import { ValidateUserProvider } from './validateUser.provider';
 import { LoginUserProvider } from './loginUser.provider';
 import { LoginUserDto } from '../dto/loginUser.dto';
 import { Request } from 'express';
+import { RefreshTokenDto } from '../dto/refreshToken.dto';
+import { RefreshTokensProvider } from './refreshTokens.provider';
+import { RefreshTokenRepositoryOperations } from './RefreshTokenCrud.repository';
+import { ForgotPasswordDto } from '../dto/forgotPassword.dto';
+import { EmailService } from 'src/email/email.service';
+import { ResetPasswordDto } from '../dto/resetPassword.dto';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +28,12 @@ export class AuthService {
     private readonly validateUserProvider: ValidateUserProvider,
 
     private readonly loginUserProvider: LoginUserProvider,
+
+    private readonly refreshTokensProvider: RefreshTokensProvider,
+
+    private readonly refreshTokenRepositoryOperations: RefreshTokenRepositoryOperations,
+
+    private readonly emailService: EmailService,
   ) {}
 
   // CREATE A NEW USER
@@ -42,5 +59,57 @@ export class AuthService {
   // RESEND VERIFY EMAIL
   public async ResendVerifyEmail(user: User) {
     return await this.usersService.resendVerifyEmail(user);
+  }
+
+  // REFRESH TOKEN
+  public async refreshToken(
+    refreshTokenDto: RefreshTokenDto,
+    userId: string,
+    req: Request,
+  ) {
+    return await this.refreshTokensProvider.refreshTokens(
+      userId,
+      refreshTokenDto.refreshToken,
+      req,
+    );
+  }
+
+  // LOG OUT
+  public async logout(userId: string, refreshToken: string) {
+    return await this.refreshTokenRepositoryOperations.revokeSingleRefreshToken(
+      userId,
+      refreshToken,
+    );
+  }
+
+  // LOG OUT ALL SESSIONS/DEVICES
+  public async logoutAllSessions(userId: string) {
+    return await this.refreshTokenRepositoryOperations.revokeAllRefreshTokens(
+      userId,
+    );
+  }
+
+  // FORGOT PASSWORD
+  public async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
+    try {
+      const { token, user } =
+        await this.usersService.forgotPasswordResetToken(forgotPasswordDto);
+
+      await this.emailService.sendPasswordResetEmail(user, token);
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Error sending password reset email',
+      );
+    }
+
+    return {
+      success: true,
+      message: 'Reset password email sent',
+    };
+  }
+
+  // RESET PASSWORD
+  public async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    return await this.usersService.resetPassword(resetPasswordDto);
   }
 }

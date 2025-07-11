@@ -10,6 +10,10 @@ import { User } from '../entities/user.entity';
 import { ResendEmailVerificationProvider } from './resendVerifyEmail.provider';
 import { FindOneUserByEmailProvider } from './findOneUserByEmail.provider';
 import { FindOneUserByIdProvider } from './findOneUserById.provider';
+import { PasswordResetTokenProvider } from './passwordResetToken.provider';
+import { ResetPasswordProvider } from './passwordReset.provider';
+import { ForgotPasswordDto } from 'src/auth/dto/forgotPassword.dto';
+import { ResetPasswordDto } from 'src/auth/dto/resetPassword.dto';
 
 @Injectable()
 export class UsersService {
@@ -27,6 +31,10 @@ export class UsersService {
     private readonly findOneUserByEmailProvider: FindOneUserByEmailProvider,
 
     private readonly findOneUserByIdProvider: FindOneUserByIdProvider,
+
+    private readonly passwordResetProvider: PasswordResetTokenProvider,
+
+    private readonly resetPasswordProvider: ResetPasswordProvider,
   ) {}
 
   // FIND ONE USER BY EMAIL
@@ -72,5 +80,17 @@ export class UsersService {
   // RESEND VERIFY USER EMAIL
   public async resendVerifyEmail(user: User) {
     return await this.resendVerifyEmailProvider.resendEmailVerification(user);
+  }
+
+  // FORGOT PASSWORD
+  public async forgotPasswordResetToken(forgotPasswordDto: ForgotPasswordDto) {
+    return await this.passwordResetProvider.setPasswordResetToken(
+      forgotPasswordDto.email,
+    );
+  }
+
+  // RESET PASSWORD
+  public async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    return await this.resetPasswordProvider.resetPassword(resetPasswordDto);
   }
 }

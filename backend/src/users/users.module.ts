@@ -12,6 +12,8 @@ import { VerifyEmailProvider } from './providers/verifyEmail.provider';
 import { ResendEmailVerificationProvider } from './providers/resendVerifyEmail.provider';
 import { FindOneUserByEmailProvider } from './providers/findOneUserByEmail.provider';
 import { FindOneUserByIdProvider } from './providers/findOneUserById.provider';
+import { ResetPasswordProvider } from './providers/passwordReset.provider';
+import { PasswordResetTokenProvider } from './providers/passwordResetToken.provider';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { FindOneUserByIdProvider } from './providers/findOneUserById.provider';
     ResendEmailVerificationProvider,
     FindOneUserByEmailProvider,
     FindOneUserByIdProvider,
+    ResetPasswordProvider,
+    PasswordResetTokenProvider,
   ],
   exports: [UsersService],
 })
