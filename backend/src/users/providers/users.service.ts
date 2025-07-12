@@ -18,7 +18,8 @@ import { ChangePasswordProvider } from './changeUserPassword.provider';
 import { ChangePasswordDto } from 'src/auth/dto/changeUserPassword.dto';
 import { GetUserProfileProvider } from './getUserProfile.provider';
 import { UpdateOneUserProvider } from './updateOneUser.provider';
-import { FindAllUsersProvider } from './adminOnly/findAllUsers.provider';
+import { FindAllUsersProvider } from './findAllUsers.provider';
+import { DeleteOneUserProvider } from './deleteOneUser.provider';
 
 @Injectable()
 export class UsersService {
@@ -48,6 +49,8 @@ export class UsersService {
     private readonly updateUserProvider: UpdateOneUserProvider,
 
     private readonly findAllUsersProvider: FindAllUsersProvider,
+
+    private readonly deleteOneUserProvider: DeleteOneUserProvider,
   ) {}
 
   // FIND ONE USER BY EMAIL
@@ -115,13 +118,18 @@ export class UsersService {
     return await this.updateUserProvider.updateOneUser(userId, updateUserDto);
   }
 
-  // DELETE A SINGLE USER
-  public async deleteSingleUser(userId: string) {
-    return await this.userCrudActivities.deleteSinlgeUser(userId);
-  }
-
   // GET ALL USERS
   public async getAllUsers() {
     return await this.findAllUsersProvider.allUsers();
+  }
+
+  // GET SINGLE USER
+  public async getSingleUser(userId: string) {
+    return await this.findOneUserByIdProvider.findOneUserById(userId);
+  }
+
+  // DELETE A SINGLE USER - ADMIN
+  public async deleteSingleUser(userId: string) {
+    return await this.deleteOneUserProvider.deleteUser(userId);
   }
 }

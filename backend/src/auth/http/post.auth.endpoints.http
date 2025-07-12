@@ -3,10 +3,10 @@ POST http://localhost:4000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "firstName": "Yusuf",
-    "lastName": "Falade",
-    "email": "faladeyusuf54@gmail.com",
-    "password": "Adetomi.544$$"
+    "firstName": "test",
+    "lastName": "user",
+    "email": "testuser@gmail.com",
+    "password": "Testuser.544$$"
 }
 
 // LOGIN USER
@@ -14,8 +14,8 @@ POST http://localhost:4000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "tomilolaaaaa@gmail.com",
-    "password": "Opeyemi.544$$"
+    "email": "testuser@gmail.com",
+    "password": "Testuser.544$$"
 }
 
 // VERIFY EMAIL

@@ -17,7 +17,8 @@ import { PasswordResetTokenProvider } from './providers/passwordResetToken.provi
 import { ChangePasswordProvider } from './providers/changeUserPassword.provider';
 import { GetUserProfileProvider } from './providers/getUserProfile.provider';
 import { UpdateOneUserProvider } from './providers/updateOneUser.provider';
-import { FindAllUsersProvider } from './providers/adminOnly/findAllUsers.provider';
+import { FindAllUsersProvider } from './providers/findAllUsers.provider';
+import { DeleteOneUserProvider } from './providers/deleteOneUser.provider';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { FindAllUsersProvider } from './providers/adminOnly/findAllUsers.provide
     GetUserProfileProvider,
     UpdateOneUserProvider,
     FindAllUsersProvider,
+    DeleteOneUserProvider,
   ],
   exports: [UsersService],
 })
