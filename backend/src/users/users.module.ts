@@ -19,12 +19,14 @@ import { GetUserProfileProvider } from './providers/getUserProfile.provider';
 import { UpdateOneUserProvider } from './providers/updateOneUser.provider';
 import { FindAllUsersProvider } from './providers/findAllUsers.provider';
 import { DeleteOneUserProvider } from './providers/deleteOneUser.provider';
+import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     forwardRef(() => AuthModule),
     EmailModule,
+    CloudinaryModule,
   ],
   controllers: [UsersController],
   providers: [

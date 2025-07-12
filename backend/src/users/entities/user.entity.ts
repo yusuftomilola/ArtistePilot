@@ -1,12 +1,14 @@
 import { Exclude } from 'class-transformer';
 import { RefreshTokenEntity } from 'src/auth/entities/refreshToken.entity';
 import { UserRole } from 'src/auth/enums/roles.enum';
+import { CloudinaryImage } from 'src/cloudinary/cloudinary.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -49,6 +51,9 @@ export class User {
     default: UserRole.USER,
   })
   role: UserRole;
+
+  @OneToOne(() => CloudinaryImage, (profilePic) => profilePic.user)
+  profilePic?: CloudinaryImage;
 
   @OneToMany(() => RefreshTokenEntity, (token) => token.user)
   @Exclude()

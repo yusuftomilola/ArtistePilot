@@ -1,0 +1,10 @@
+POST http://localhost:4000/cloudinary/online-file-upload
+Content-Type: multipart/form-data; boundary=WebkitFormBoundary
+
+file
+--WebkitFormBoundary
+Content-Disposition: form-data; name="file"; filename="BlockfolioTwo.jpeg"
+Content-Type: image/jpeg
+
+< ../../../public/img/BlockfolioTwo.jpeg
+--WebkitFormBoundary--

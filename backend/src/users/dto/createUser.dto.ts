@@ -40,4 +40,7 @@ export class CreateUserDto {
   @MinLength(2)
   @MaxLength(60)
   userName?: string;
+
+  @IsOptional()
+  profilePic?: Express.Multer.File;
 }
