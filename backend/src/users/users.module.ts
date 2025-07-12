@@ -14,6 +14,10 @@ import { FindOneUserByEmailProvider } from './providers/findOneUserByEmail.provi
 import { FindOneUserByIdProvider } from './providers/findOneUserById.provider';
 import { ResetPasswordProvider } from './providers/passwordReset.provider';
 import { PasswordResetTokenProvider } from './providers/passwordResetToken.provider';
+import { ChangePasswordProvider } from './providers/changeUserPassword.provider';
+import { GetUserProfileProvider } from './providers/getUserProfile.provider';
+import { UpdateOneUserProvider } from './providers/updateOneUser.provider';
+import { FindAllUsersProvider } from './providers/adminOnly/findAllUsers.provider';
 
 @Module({
   imports: [
@@ -33,6 +37,10 @@ import { PasswordResetTokenProvider } from './providers/passwordResetToken.provi
     FindOneUserByIdProvider,
     ResetPasswordProvider,
     PasswordResetTokenProvider,
+    ChangePasswordProvider,
+    GetUserProfileProvider,
+    UpdateOneUserProvider,
+    FindAllUsersProvider,
   ],
   exports: [UsersService],
 })

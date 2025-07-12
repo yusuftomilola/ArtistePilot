@@ -14,6 +14,11 @@ import { PasswordResetTokenProvider } from './passwordResetToken.provider';
 import { ResetPasswordProvider } from './passwordReset.provider';
 import { ForgotPasswordDto } from 'src/auth/dto/forgotPassword.dto';
 import { ResetPasswordDto } from 'src/auth/dto/resetPassword.dto';
+import { ChangePasswordProvider } from './changeUserPassword.provider';
+import { ChangePasswordDto } from 'src/auth/dto/changeUserPassword.dto';
+import { GetUserProfileProvider } from './getUserProfile.provider';
+import { UpdateOneUserProvider } from './updateOneUser.provider';
+import { FindAllUsersProvider } from './adminOnly/findAllUsers.provider';
 
 @Injectable()
 export class UsersService {
@@ -35,6 +40,14 @@ export class UsersService {
     private readonly passwordResetProvider: PasswordResetTokenProvider,
 
     private readonly resetPasswordProvider: ResetPasswordProvider,
+
+    private readonly changePasswordProvider: ChangePasswordProvider,
+
+    private readonly getUserProfileProvider: GetUserProfileProvider,
+
+    private readonly updateUserProvider: UpdateOneUserProvider,
+
+    private readonly findAllUsersProvider: FindAllUsersProvider,
   ) {}
 
   // FIND ONE USER BY EMAIL
@@ -59,19 +72,6 @@ export class UsersService {
     return user;
   }
 
-  // UPDATE A SINGLE USER
-  public async updateSingleUser(updateUserDto: UpdateUserDto, userId: string) {
-    return await this.userCrudActivities.updateSinlgeUser(
-      updateUserDto,
-      userId,
-    );
-  }
-
-  // DELETE A SINGLE USER
-  public async deleteSingleUser(userId: string) {
-    return await this.userCrudActivities.deleteSinlgeUser(userId);
-  }
-
   // VERIFY USER EMAIL
   public async verifyEmail(verifyEmailDto: VerifyEmailDto) {
     return await this.verifyEmailProvider.verifyEmail(verifyEmailDto);
@@ -92,5 +92,36 @@ export class UsersService {
   // RESET PASSWORD
   public async resetPassword(resetPasswordDto: ResetPasswordDto) {
     return await this.resetPasswordProvider.resetPassword(resetPasswordDto);
+  }
+
+  // CHANGE PASSWORD
+  public async changePassword(
+    userEmail: string,
+    changePasswordDto: ChangePasswordDto,
+  ) {
+    return await this.changePasswordProvider.changePassword(
+      userEmail,
+      changePasswordDto,
+    );
+  }
+
+  // GET USER PROFILE
+  public async userProfile(user: User) {
+    return await this.getUserProfileProvider.getUserProfile(user);
+  }
+
+  // UPDATE USER
+  public async updateUser(userId: string, updateUserDto: UpdateUserDto) {
+    return await this.updateUserProvider.updateOneUser(userId, updateUserDto);
+  }
+
+  // DELETE A SINGLE USER
+  public async deleteSingleUser(userId: string) {
+    return await this.userCrudActivities.deleteSinlgeUser(userId);
+  }
+
+  // GET ALL USERS
+  public async getAllUsers() {
+    return await this.findAllUsersProvider.allUsers();
   }
 }

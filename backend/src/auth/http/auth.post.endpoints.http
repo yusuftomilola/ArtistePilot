@@ -14,8 +14,8 @@ POST http://localhost:4000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "faladeyusuf54@gmail.com",
-    "password": "Adetomi.544$$"
+    "email": "tomilolaaaaa@gmail.com",
+    "password": "Opeyemi.544$$"
 }
 
 // VERIFY EMAIL
@@ -29,28 +29,28 @@ Content-Type: application/json
 
 // RESEND VERIFICATION EMAIL
 POST http://localhost:4000/api/v1/auth/resend-verify-email
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImVtYWlsIjoiZmFsYWRleXVzdWY1NEBnbWFpbC5jb20iLCJpYXQiOjE3NTIyNDgzMjQsImV4cCI6MTc1MjI1MTkyNCwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.7WZFCi6ZEC2yl928QpiSVO8erlnwdSi4ZMCj8imK1zo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjkxMDYwZC1kYzM5LTQyYzEtYWE3NC0yMzA1ZjVmODBmNDEiLCJyb2xlIjoidXNlciIsImVtYWlsIjoidG9taWxvbGFhYWFhQGdtYWlsLmNvbSIsImlhdCI6MTc1MjI4NzExMiwiZXhwIjoxNzUyMjkwNzEyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.JXhpJmaC_2m8Fq9BC5ZSZjb_N8E61CH9tJ36SQjxWd8
 
 // REFRESH TOKEN - GET AN ACCESS TOKEN USING THE REFRESH TOKEN
 POST http://localhost:4000/api/v1/auth/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImlhdCI6MTc1MjI0ODMyNCwiZXhwIjoxNzUyMzM0NzI0LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.ty55UyVfk66f2hZtL5NCkgSVMVpsCZlPb9_LalpxPdo"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjkxMDYwZC1kYzM5LTQyYzEtYWE3NC0yMzA1ZjVmODBmNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc1MjI4NzExMiwiZXhwIjoxNzUyMzczNTEyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.ztq6oktfPxn0-d-HsXZOmu0Nht6AfIv1L71zTp6hdq8"
 }
 
 // LOG OUT
 POST http://localhost:4000/api/v1/auth/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImVtYWlsIjoiZmFsYWRleXVzdWY1NEBnbWFpbC5jb20iLCJpYXQiOjE3NTIyNDgzMjQsImV4cCI6MTc1MjI1MTkyNCwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.7WZFCi6ZEC2yl928QpiSVO8erlnwdSi4ZMCj8imK1zo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjkxMDYwZC1kYzM5LTQyYzEtYWE3NC0yMzA1ZjVmODBmNDEiLCJyb2xlIjoidXNlciIsImVtYWlsIjoidG9taWxvbGFhYWFhQGdtYWlsLmNvbSIsImlhdCI6MTc1MjI4NzExMiwiZXhwIjoxNzUyMjkwNzEyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.JXhpJmaC_2m8Fq9BC5ZSZjb_N8E61CH9tJ36SQjxWd8
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImlhdCI6MTc1MjI0ODMyNCwiZXhwIjoxNzUyMzM0NzI0LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.ty55UyVfk66f2hZtL5NCkgSVMVpsCZlPb9_LalpxPdo"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjkxMDYwZC1kYzM5LTQyYzEtYWE3NC0yMzA1ZjVmODBmNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc1MjI4NzExMiwiZXhwIjoxNzUyMzczNTEyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.ztq6oktfPxn0-d-HsXZOmu0Nht6AfIv1L71zTp6hdq8"
 }
 
 // LOG OUT ALL DEVICES/SESSIONS
 POST http://localhost:4000/api/v1/auth/logout-all-sessions
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNWQxNGU0MS1lZDc2LTQwYWQtOGYwYi03OThhOTRlZmI3MDgiLCJyb2xlIjoidXNlciIsImVtYWlsIjoiZmFsYWRleXVzdWY1NEBnbWFpbC5jb20iLCJpYXQiOjE3NTIyNDgzMjQsImV4cCI6MTc1MjI1MTkyNCwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.7WZFCi6ZEC2yl928QpiSVO8erlnwdSi4ZMCj8imK1zo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjkxMDYwZC1kYzM5LTQyYzEtYWE3NC0yMzA1ZjVmODBmNDEiLCJyb2xlIjoidXNlciIsImVtYWlsIjoidG9taWxvbGFhYWFhQGdtYWlsLmNvbSIsImlhdCI6MTc1MjI4NzExMiwiZXhwIjoxNzUyMjkwNzEyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.JXhpJmaC_2m8Fq9BC5ZSZjb_N8E61CH9tJ36SQjxWd8
 
 // FORGOT PASSWORD
 POST http://localhost:4000/api/v1/auth/forgot-password
@@ -68,4 +68,14 @@ Content-Type: application/json
     "email": "tomilolaaaaa@gmail.com",
     "token": "b3ee64ffhbuih97kul284j",
     "password": "Opeyemi.544$$"
+}
+
+// CHANGE PASSWORD
+POST http://localhost:4000/api/v1/auth/change-password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjkxMDYwZC1kYzM5LTQyYzEtYWE3NC0yMzA1ZjVmODBmNDEiLCJyb2xlIjoidXNlciIsImVtYWlsIjoidG9taWxvbGFhYWFhQGdtYWlsLmNvbSIsImlhdCI6MTc1MjI4NzExMiwiZXhwIjoxNzUyMjkwNzEyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.JXhpJmaC_2m8Fq9BC5ZSZjb_N8E61CH9tJ36SQjxWd8
+
+{
+    "currentPassword": "Opeyemi.544$$",
+    "newPassword": "Omolomo.544$$"
 }

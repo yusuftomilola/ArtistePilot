@@ -9,6 +9,7 @@ import { EmailModule } from './email/email.module';
 import jwtConfig from './auth/config/jwtConfig';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwtAuth.guard';
+import { RolesGuard } from './auth/guards/roles.guard';
 
 @Module({
   imports: [
@@ -40,6 +41,10 @@ import { JwtAuthGuard } from './auth/guards/jwtAuth.guard';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })

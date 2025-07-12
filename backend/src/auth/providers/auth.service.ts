@@ -18,6 +18,7 @@ import { RefreshTokenRepositoryOperations } from './RefreshTokenCrud.repository'
 import { ForgotPasswordDto } from '../dto/forgotPassword.dto';
 import { EmailService } from 'src/email/email.service';
 import { ResetPasswordDto } from '../dto/resetPassword.dto';
+import { ChangePasswordDto } from '../dto/changeUserPassword.dto';
 
 @Injectable()
 export class AuthService {
@@ -111,5 +112,13 @@ export class AuthService {
   // RESET PASSWORD
   public async resetPassword(resetPasswordDto: ResetPasswordDto) {
     return await this.usersService.resetPassword(resetPasswordDto);
+  }
+
+  // CHANGE PASSWORD
+  public async changePassword(
+    userEmail: string,
+    changePasswordDto: ChangePasswordDto,
+  ) {
+    return await this.usersService.changePassword(userEmail, changePasswordDto);
   }
 }

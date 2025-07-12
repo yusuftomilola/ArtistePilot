@@ -20,6 +20,7 @@ import { RefreshTokenGuard } from './guards/refreshToken.guard';
 import { RefreshTokenDto } from './dto/refreshToken.dto';
 import { ForgotPasswordDto } from './dto/forgotPassword.dto';
 import { ResetPasswordDto } from './dto/resetPassword.dto';
+import { ChangePasswordDto } from './dto/changeUserPassword.dto';
 
 @Controller('api/v1/auth')
 export class AuthController {
@@ -105,5 +106,15 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   public async resetpassword(@Body() resetPasswordDto: ResetPasswordDto) {
     return await this.authService.resetPassword(resetPasswordDto);
+  }
+
+  // CHANGE PASSWORD
+  @Post('change-password')
+  @HttpCode(HttpStatus.OK)
+  public async changePassword(
+    @GetUser() user: User,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ) {
+    return await this.authService.changePassword(user.email, changePasswordDto);
   }
 }
