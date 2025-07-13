@@ -40,9 +40,9 @@ export class CloudinaryService {
       throw new BadRequestException('Mime type is not supported');
     }
 
-    // Validate file size (10MB limit)
-    if (file.size > 10 * 1024 * 1024) {
-      throw new BadRequestException('File size exceeds 10MB limit');
+    // Validate file size (1MB limit)
+    if (file.size > 1 * 1024 * 1024) {
+      throw new BadRequestException('File size exceeds 1MB limit');
     }
 
     return new Promise((resolve) => {

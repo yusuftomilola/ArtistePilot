@@ -16,7 +16,10 @@ async function bootstrap() {
 
   // ENABLE CORS
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? ['https://artistepilot.com', 'https://www.artistepilot.com']
+        : 'http:localhost:3000',
     credentials: true,
   });
 
@@ -25,6 +28,6 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 4000);
 
-  console.log('Server is running on port:4000');
+  console.log(`Server is running on port: ${process.env.PORT ?? 4000}`);
 }
 bootstrap();

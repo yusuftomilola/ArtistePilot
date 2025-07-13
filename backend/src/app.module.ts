@@ -31,7 +31,13 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
         port: +configService.get('DATABASE_PORT'),
         host: configService.get('DATABASE_HOST'),
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: configService.get('NODE_ENV') !== 'production',
+        migrationsRun: configService.get('NODE_ENV') === 'production',
+        migrations: ['dist/database/migrations/*{.ts, .js}'],
+        ssl:
+          configService.get('NODE_ENV') === 'production'
+            ? { rejectUnauthorized: false }
+            : false,
       }),
     }),
     EmailModule,
