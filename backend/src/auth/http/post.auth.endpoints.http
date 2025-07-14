@@ -3,10 +3,10 @@ POST http://localhost:4000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "firstName": "test",
-    "lastName": "user",
-    "email": "testuser@gmail.com",
-    "password": "Testuser.544$$"
+    "firstName": "Yusuf",
+    "lastName": "Falade",
+    "email": "faladeyusuf54@gmail.com",
+    "password": "Adetomi.544$$"
 }
 
 // LOGIN USER
@@ -14,8 +14,8 @@ POST http://localhost:4000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "testuser@gmail.com",
-    "password": "Testuser.544$$"
+    "email": "faladeyusuf54@gmail.com",
+    "password": "Adetomi.544$$"
 }
 
 // VERIFY EMAIL
@@ -23,8 +23,8 @@ POST http://localhost:4000/api/v1/auth/verify-email
 Content-Type: application/json
 
 {
-    "token": "jp4kv8l6l6kyckhi23seig",
-    "userId": "e5d14e41-ed76-40ad-8f0b-798a94efb708"
+    "token": "v6pvjsotzsfc3rat9zyxrs",
+    "userId": "0c6dd626-f9bb-47c3-9270-7c8187e82c07"
 }
 
 // RESEND VERIFICATION EMAIL
