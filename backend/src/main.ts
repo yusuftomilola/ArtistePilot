@@ -19,7 +19,11 @@ async function bootstrap() {
   app.enableCors({
     origin:
       process.env.NODE_ENV === 'production'
-        ? ['https://artistepilot.com', 'https://www.artistepilot.com']
+        ? [
+            'https://artistepilot.com',
+            'https://www.artistepilot.com',
+            'http:localhost:3000',
+          ]
         : 'http:localhost:3000',
     credentials: true,
   });
