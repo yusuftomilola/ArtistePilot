@@ -1,10 +1,9 @@
 "use client";
 import { useAuth } from "@/lib/hooks/useAuth";
 import { useState } from "react";
-import { redirect } from "next/navigation";
 
 export default function LoginForm() {
-  const { login, loading, isSuccessful } = useAuth();
+  const { login, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,7 +11,6 @@ export default function LoginForm() {
     e.preventDefault();
     try {
       await login({ email, password });
-      if (isSuccessful) redirect("/");
     } catch (error) {
       console.log("Login failed:", error);
     }
