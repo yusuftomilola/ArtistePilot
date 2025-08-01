@@ -11,6 +11,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwtAuth.guard';
 import { RolesGuard } from './auth/guards/roles.guard';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { NewsletterModule } from './newsletter/newsletter.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     }),
     EmailModule,
     CloudinaryModule,
+    NewsletterModule,
   ],
   controllers: [AppController],
   providers: [
