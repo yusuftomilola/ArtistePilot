@@ -7,6 +7,12 @@ import * as bodyparser from 'body-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // PARSER FOR WEBHOOK - Configure raw body parser for webhook signature verification
+  app.use(
+    '/api/v1/newsletter/webhook',
+    bodyparser.raw({ type: 'application/json' }),
+  );
+
   //PARSER FOR WEBHOOK
   app.use(bodyparser.urlencoded({ extended: true }));
   app.use(bodyparser.json());
