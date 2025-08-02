@@ -82,6 +82,7 @@ export class NewsletterController {
 
   @IsPublic()
   @Post('webhook')
+  @ApiOperation({ summary: 'Mailchimp webhook to update subscriber status' })
   @HttpCode(HttpStatus.OK)
   public async handleWebhook(@Req() req: Request) {
     const payload = req.body;
