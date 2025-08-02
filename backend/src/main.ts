@@ -2,9 +2,14 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as bodyparser from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  //PARSER FOR WEBHOOK
+  app.use(bodyparser.urlencoded({ extended: true }));
+  app.use(bodyparser.json());
 
   // GLOBAL VALIDATION
   app.useGlobalPipes(
