@@ -12,6 +12,8 @@ import { JwtAuthGuard } from './auth/guards/jwtAuth.guard';
 import { RolesGuard } from './auth/guards/roles.guard';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { NewsletterModule } from './newsletter/newsletter.module';
+import { MailchimpModule } from './mailchimp/mailchimp.module';
+import mailchimpConfig from './mailchimp/config/mailchimpConfig';
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { NewsletterModule } from './newsletter/newsletter.module';
     UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [jwtConfig],
+      load: [jwtConfig, mailchimpConfig],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -42,6 +44,7 @@ import { NewsletterModule } from './newsletter/newsletter.module';
     EmailModule,
     CloudinaryModule,
     NewsletterModule,
+    MailchimpModule,
   ],
   controllers: [AppController],
   providers: [
