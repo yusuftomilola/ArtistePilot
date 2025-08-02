@@ -5,6 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Req,
 } from '@nestjs/common';
 import { NewsletterService } from './newsletter.service';
 import { IsPublic } from 'src/auth/decorators/public.decorator';
@@ -12,7 +13,14 @@ import { CreateNewsletterEmailDto } from './dto/createNewsletterEmail.dto';
 import { EmailDto } from './dto/email.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { UserRole } from 'src/auth/enums/roles.enum';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+import { Request } from 'express';
 
 @ApiTags('Newsletter')
 @Controller('api/v1/newsletter')
@@ -67,7 +75,28 @@ export class NewsletterController {
     status: 200,
     description: 'Returns a list of all newsletter subscribers',
   })
+  @ApiBearerAuth()
   public async getAllSubscribers() {
     return await this.newsletterService.getAllSubscribers();
+  }
+
+  @IsPublic()
+  @Post('webhook')
+  @HttpCode(HttpStatus.OK)
+  public async handleWebhook(@Req() req: Request) {
+    const payload = req.body;
+
+    const email = payload?.data?.email;
+    const event = payload?.type;
+
+    if (!email || !event) return;
+
+    if (event === 'unsubscribe') {
+      await this.newsletterService.setSubscriptionStatus(email, false);
+    } else if (event === 'subscribe') {
+      await this.newsletterService.setSubscriptionStatus(email, true);
+    }
+
+    return 'OK';
   }
 }

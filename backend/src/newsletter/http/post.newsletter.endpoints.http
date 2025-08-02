@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "category": "tech",
-    "email": "faladeyusuf54@gmail.com"
+    "email": "tomilolaaaaa@gmail.com"
 }
 
 // UNSUBSCRIBE A USER FROM NEWSLETTER
@@ -12,7 +12,7 @@ POST http://localhost:4000/api/v1/newsletter/unsubscribe
 Content-Type: application/json
 
 {
-    "email": "faladeyusuf54@gmail.com"
+    "email": "tomilolaaaaa@gmail.com"
 }
 
 // RESUBSCRIBE A USER FROM NEWSLETTER
@@ -20,5 +20,5 @@ POST http://localhost:4000/api/v1/newsletter/resubscribe
 Content-Type: application/json
 
 {
-    "email": "faladeyusuf54@gmail.com"
+    "email": "tomilolaaaaa@gmail.com"
 }

@@ -7,12 +7,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Newsletter } from './entities/newsletter.entity';
 import { Repository } from 'typeorm';
 import { CreateNewsletterEmailDto } from './dto/createNewsletterEmail.dto';
+import { MailchimpService } from 'src/mailchimp/mailchimp.service';
 
 @Injectable()
 export class NewsletterService {
   constructor(
     @InjectRepository(Newsletter)
     private readonly newsletterEmailRepository: Repository<Newsletter>,
+
+    private readonly mailchimpService: MailchimpService,
   ) {}
 
   public async subscribe(createNewsletterEmailDto: CreateNewsletterEmailDto) {
@@ -37,6 +40,7 @@ export class NewsletterService {
       createNewsletterEmailDto,
     );
     await this.newsletterEmailRepository.save(newSubscriber);
+    await this.mailchimpService.subscribeUser(createNewsletterEmailDto.email);
     return 'You have been subscribed successfully';
   }
 
@@ -58,6 +62,9 @@ export class NewsletterService {
     existing.isSubscribed = false;
     await this.newsletterEmailRepository.save(existing);
 
+    // reflect in mailchimp
+    await this.mailchimpService.updateUserStatus(email, 'unsubscribed');
+
     return 'You have been unsubscribed successfully';
   }
 
@@ -78,6 +85,10 @@ export class NewsletterService {
 
     existing.isSubscribed = true;
     await this.newsletterEmailRepository.save(existing);
+
+    //reflect in mailchimp
+    await this.mailchimpService.updateUserStatus(email, 'subscribed');
+
     return 'You have been resubscribed successfully';
   }
 
@@ -89,5 +100,18 @@ export class NewsletterService {
     return {
       subscribers,
     };
+  }
+
+  public async setSubscriptionStatus(email: string, isSubscribed: boolean) {
+    const user = await this.newsletterEmailRepository.findOne({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) return;
+
+    user.isSubscribed = isSubscribed;
+    await this.newsletterEmailRepository.save(user);
   }
 }
