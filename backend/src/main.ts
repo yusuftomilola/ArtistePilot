@@ -8,10 +8,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // PARSER FOR WEBHOOK - Configure raw body parser for webhook signature verification
-  app.use(
-    '/api/v1/newsletter/webhook',
-    bodyparser.raw({ type: 'application/json' }),
-  );
+  app.use('/api/v1/newsletter/webhook', (req, res, next) => {
+    bodyparser.json({
+      verify: (req: any, res, buf) => {
+        req.rawBody = buf.toString('utf8');
+      },
+    })(req, res, next);
+  });
 
   //PARSER FOR WEBHOOK
   app.use(bodyparser.urlencoded({ extended: true }));
@@ -35,7 +38,7 @@ async function bootstrap() {
             'https://www.artistepilot.com',
             'http://localhost:3000',
           ]
-        : 'http://localhost:3000',
+        : true,
     credentials: true,
   });
 

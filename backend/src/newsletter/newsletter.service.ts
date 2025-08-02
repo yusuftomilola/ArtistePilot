@@ -103,15 +103,48 @@ export class NewsletterService {
   }
 
   public async setSubscriptionStatus(email: string, isSubscribed: boolean) {
-    const user = await this.newsletterEmailRepository.findOne({
-      where: {
-        email,
-      },
-    });
+    try {
+      console.log(
+        `Attempting to update subscription status for ${email} to ${isSubscribed}`,
+      );
 
-    if (!user) return;
+      const user = await this.newsletterEmailRepository.findOne({
+        where: {
+          email,
+        },
+      });
 
-    user.isSubscribed = isSubscribed;
-    await this.newsletterEmailRepository.save(user);
+      if (!user) {
+        console.log(`User not found in database: ${email}`);
+        // Create a new user entry if they don't exist
+        const newUser = this.newsletterEmailRepository.create({
+          email,
+          isSubscribed,
+        });
+        await this.newsletterEmailRepository.save(newUser);
+        console.log(
+          `Created new user entry for ${email} with status ${isSubscribed}`,
+        );
+        return;
+      }
+
+      if (user.isSubscribed === isSubscribed) {
+        console.log(
+          `User ${email} already has status ${isSubscribed}, no update needed`,
+        );
+        return;
+      }
+
+      const previousStatus = user.isSubscribed;
+      user.isSubscribed = isSubscribed;
+      await this.newsletterEmailRepository.save(user);
+
+      console.log(
+        `Successfully updated ${email} from ${previousStatus} to ${isSubscribed}`,
+      );
+    } catch (error) {
+      console.error(`Error updating subscription status for ${email}:`, error);
+      throw error;
+    }
   }
 }
