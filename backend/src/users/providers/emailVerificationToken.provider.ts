@@ -58,6 +58,6 @@ export class EmailVerificationTokenProvider {
       );
     }
 
-    return token;
+    return hashedToken;
   }
 }

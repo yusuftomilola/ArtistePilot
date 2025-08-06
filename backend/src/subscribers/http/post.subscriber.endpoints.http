@@ -1,0 +1,24 @@
+// SUBSCRIBE A USER
+POST http://localhost:4000/api/v1/subscribers/create
+Content-Type: application/json
+
+{
+    "category": "tech",
+    "email": "faladeyusuf55@gmail.com"
+}
+
+// UNSUBSCRIBE A USER
+POST http://localhost:4000/api/v1/subscribers/unsubscribe
+Content-Type: application/json
+
+{
+    "email": "tomilolaaaaa@gmail.com"
+}
+
+// RESUBSCRIBE A USER
+POST http://localhost:4000/api/v1/subscribers/resubscribe
+Content-Type: application/json
+
+{
+    "email": "tomilolaaaaa@gmail.com"
+}

@@ -93,10 +93,10 @@ export class AuthService {
   // FORGOT PASSWORD
   public async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
     try {
-      const { token, user } =
+      const { hashedToken, user } =
         await this.usersService.forgotPasswordResetToken(forgotPasswordDto);
 
-      await this.emailService.sendPasswordResetEmail(user, token);
+      await this.emailService.sendPasswordResetEmail(user, hashedToken);
     } catch (error) {
       throw new InternalServerErrorException(
         'Error sending password reset email',

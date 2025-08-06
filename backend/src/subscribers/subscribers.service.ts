@@ -4,24 +4,24 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Newsletter } from './entities/newsletter.entity';
+import { Subscriber } from './entities/subscriber.entity';
 import { Repository } from 'typeorm';
-import { CreateNewsletterEmailDto } from './dto/createNewsletterEmail.dto';
+import { CreateSubscriberEmailDto } from './dto/createSubscriberEmail.dto';
 import { MailchimpService } from 'src/mailchimp/mailchimp.service';
 
 @Injectable()
-export class NewsletterService {
+export class SubscriberService {
   constructor(
-    @InjectRepository(Newsletter)
-    private readonly newsletterEmailRepository: Repository<Newsletter>,
+    @InjectRepository(Subscriber)
+    private readonly subscriberEmailRepository: Repository<Subscriber>,
 
     private readonly mailchimpService: MailchimpService,
   ) {}
 
-  public async subscribe(createNewsletterEmailDto: CreateNewsletterEmailDto) {
-    const existing = await this.newsletterEmailRepository.findOne({
+  public async subscribe(createSubscriberEmailDto: CreateSubscriberEmailDto) {
+    const existing = await this.subscriberEmailRepository.findOne({
       where: {
-        email: createNewsletterEmailDto.email,
+        email: createSubscriberEmailDto.email,
       },
     });
 
@@ -31,21 +31,21 @@ export class NewsletterService {
       }
 
       existing.isSubscribed = true;
-      await this.newsletterEmailRepository.save(existing);
+      await this.subscriberEmailRepository.save(existing);
 
       return 'You have been resubscribed successfully';
     }
 
-    const newSubscriber = this.newsletterEmailRepository.create(
-      createNewsletterEmailDto,
+    const newSubscriber = this.subscriberEmailRepository.create(
+      createSubscriberEmailDto,
     );
-    await this.newsletterEmailRepository.save(newSubscriber);
-    await this.mailchimpService.subscribeUser(createNewsletterEmailDto.email);
+    await this.subscriberEmailRepository.save(newSubscriber);
+    await this.mailchimpService.subscribeUser(createSubscriberEmailDto.email);
     return 'You have been subscribed successfully';
   }
 
   public async unsubscribe(email: string) {
-    const existing = await this.newsletterEmailRepository.findOne({
+    const existing = await this.subscriberEmailRepository.findOne({
       where: {
         email,
       },
@@ -60,7 +60,7 @@ export class NewsletterService {
     }
 
     existing.isSubscribed = false;
-    await this.newsletterEmailRepository.save(existing);
+    await this.subscriberEmailRepository.save(existing);
 
     // reflect in mailchimp
     await this.mailchimpService.updateUserStatus(email, 'unsubscribed');
@@ -69,7 +69,7 @@ export class NewsletterService {
   }
 
   public async resubscribe(email: string) {
-    const existing = await this.newsletterEmailRepository.findOne({
+    const existing = await this.subscriberEmailRepository.findOne({
       where: {
         email,
       },
@@ -84,7 +84,7 @@ export class NewsletterService {
     }
 
     existing.isSubscribed = true;
-    await this.newsletterEmailRepository.save(existing);
+    await this.subscriberEmailRepository.save(existing);
 
     //reflect in mailchimp
     await this.mailchimpService.updateUserStatus(email, 'subscribed');
@@ -93,7 +93,7 @@ export class NewsletterService {
   }
 
   public async getAllSubscribers() {
-    const subscribers = await this.newsletterEmailRepository.find({
+    const subscribers = await this.subscriberEmailRepository.find({
       where: { isSubscribed: true },
     });
 
@@ -108,7 +108,7 @@ export class NewsletterService {
         `Attempting to update subscription status for ${email} to ${isSubscribed}`,
       );
 
-      const user = await this.newsletterEmailRepository.findOne({
+      const user = await this.subscriberEmailRepository.findOne({
         where: {
           email,
         },
@@ -117,11 +117,11 @@ export class NewsletterService {
       if (!user) {
         console.log(`User not found in database: ${email}`);
         // Create a new user entry if they don't exist
-        const newUser = this.newsletterEmailRepository.create({
+        const newUser = this.subscriberEmailRepository.create({
           email,
           isSubscribed,
         });
-        await this.newsletterEmailRepository.save(newUser);
+        await this.subscriberEmailRepository.save(newUser);
         console.log(
           `Created new user entry for ${email} with status ${isSubscribed}`,
         );
@@ -137,7 +137,7 @@ export class NewsletterService {
 
       const previousStatus = user.isSubscribed;
       user.isSubscribed = isSubscribed;
-      await this.newsletterEmailRepository.save(user);
+      await this.subscriberEmailRepository.save(user);
 
       console.log(
         `Successfully updated ${email} from ${previousStatus} to ${isSubscribed}`,

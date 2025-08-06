@@ -1,0 +1,10 @@
+// CREATE A NEW PRODUCT (ADMIN)
+POST http://localhost:4000/products/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYzZkZDYyNi1mOWJiLTQ3YzMtOTI3MC03YzgxODdlODJjMDciLCJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6ImZhbGFkZXl1c3VmNTRAZ21haWwuY29tIiwiaWF0IjoxNzU0MjM3MzA4LCJleHAiOjE3NTQyNDA5MDgsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDAwMCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDAwMCJ9.lkvUhC9qsYKNcNA5xewgk4RPjoJU2BCO840WVMTEi6o
+
+{
+    "name": "Frontend Development Training",
+    "description": "12 weeks remote intense frontend development training program",
+    "amount": 50000
+}

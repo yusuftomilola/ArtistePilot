@@ -2,6 +2,7 @@ import { Exclude } from 'class-transformer';
 import { RefreshTokenEntity } from 'src/auth/entities/refreshToken.entity';
 import { UserRole } from 'src/auth/enums/roles.enum';
 import { CloudinaryImage } from 'src/cloudinary/cloudinary.entity';
+import { Transaction } from 'src/transactions/entities/transaction.entity';
 import {
   Column,
   CreateDateColumn,
@@ -51,6 +52,9 @@ export class User {
     default: UserRole.USER,
   })
   role: UserRole;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.user)
+  transactions: Transaction[];
 
   @OneToOne(() => CloudinaryImage, (profilePic) => profilePic.user)
   profilePic?: CloudinaryImage;

@@ -5,22 +5,22 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { NewsletterCategory } from '../enums/category.enum';
+import { SubscriberCategory } from '../enums/category.enum';
 
 @Entity({
-  name: 'newsletters',
+  name: 'subscribers',
 })
-export class Newsletter {
+export class Subscriber {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
     nullable: false,
     type: 'enum',
-    enum: NewsletterCategory,
-    enumName: 'newsletter_category',
+    enum: SubscriberCategory,
+    enumName: 'subscriber_category',
   })
-  category: NewsletterCategory;
+  category: SubscriberCategory;
 
   @Column({
     unique: true,
