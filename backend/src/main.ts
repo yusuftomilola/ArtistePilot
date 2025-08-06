@@ -37,6 +37,7 @@ async function bootstrap() {
             'https://artistepilot.com',
             'https://www.artistepilot.com',
             'http://localhost:3000',
+            'http://localhost:3001',
           ]
         : true,
     credentials: true,

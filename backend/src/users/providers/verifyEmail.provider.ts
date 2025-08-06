@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   forwardRef,
   Inject,
   Injectable,
@@ -23,42 +24,28 @@ export class VerifyEmailProvider {
   ) {}
 
   public async verifyEmail(verifyEmailDto: VerifyEmailDto) {
-    const { token, userId } = verifyEmailDto;
+    const { token } = verifyEmailDto;
 
     // find the user
     const user = await this.usersRepository.findOne({
       where: {
-        id: userId,
+        emailVerificationToken: token,
       },
     });
+
+    if (!user) {
+      throw new BadRequestException('Invalid or expired reset token');
+    }
 
     // check if the token exists and if it has not expired
     if (
       !user.emailVerificationToken ||
+      !user.emailVerificationExpiresIn ||
       user.emailVerificationExpiresIn < new Date()
     ) {
-      throw new NotFoundException(
+      throw new BadRequestException(
         'Email verification token invalid or expired',
       );
-    }
-
-    // compare the email verification tokens
-    let isVerificationTokenValid: boolean;
-
-    try {
-      isVerificationTokenValid = await this.hashingProvider.compare(
-        token,
-        user.emailVerificationToken,
-      );
-    } catch (error) {
-      throw new RequestTimeoutException(
-        'Timeout! Error validation email verification token',
-      );
-    }
-
-    // check if they match
-    if (!isVerificationTokenValid) {
-      throw new NotFoundException('Email Verification token is invalid');
     }
 
     try {
@@ -83,7 +70,7 @@ export class VerifyEmailProvider {
     }
 
     return {
-      success: true,
+      status: true,
       message: 'Email verified successfully',
       user: {
         userId: user.id,

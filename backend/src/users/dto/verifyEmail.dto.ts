@@ -10,11 +10,11 @@ export class VerifyEmailDto {
   })
   token: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @ApiProperty({
-    example: 'jdfhwef-efw-dfsf-asoac',
-    description: 'ID of the user',
-  })
-  userId: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // @ApiProperty({
+  //   example: 'jdfhwef-efw-dfsf-asoac',
+  //   description: 'ID of the user',
+  // })
+  // userId: string;
 }

@@ -8,9 +8,9 @@ import {
   Post,
   Req,
 } from '@nestjs/common';
-import { NewsletterService } from './newsletter.service';
+import { SubscriberService } from './subscribers.service';
 import { IsPublic } from 'src/auth/decorators/public.decorator';
-import { CreateNewsletterEmailDto } from './dto/createNewsletterEmail.dto';
+import { CreateSubscriberEmailDto } from './dto/createSubscriberEmail.dto';
 import { EmailDto } from './dto/email.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { UserRole } from 'src/auth/enums/roles.enum';
@@ -24,62 +24,62 @@ import {
 import { Request } from 'express';
 import * as crypto from 'crypto';
 
-@ApiTags('Newsletter')
-@Controller('api/v1/newsletter')
-export class NewsletterController {
-  constructor(private readonly newsletterService: NewsletterService) {}
+@ApiTags('Subscribers')
+@Controller('api/v1/subscribers')
+export class SubscriberController {
+  constructor(private readonly subscriberService: SubscriberService) {}
 
   @IsPublic()
-  @Post('subscribe')
+  @Post('create')
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: 'Subscribe to newsletter' })
-  @ApiBody({ type: CreateNewsletterEmailDto })
+  @ApiOperation({ summary: 'Subscribe to website' })
+  @ApiBody({ type: CreateSubscriberEmailDto })
   @ApiResponse({
     status: 201,
-    description: 'User successfully subscribed to the newsletter',
+    description: 'User successfully subscribed',
   })
   public async subscribe(
-    @Body() createNewsletterEmailDto: CreateNewsletterEmailDto,
+    @Body() createSubscriberEmailDto: CreateSubscriberEmailDto,
   ) {
-    return await this.newsletterService.subscribe(createNewsletterEmailDto);
+    return await this.subscriberService.subscribe(createSubscriberEmailDto);
   }
 
   @IsPublic()
   @Post('unsubscribe')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Unsubscribe from newsletter' })
+  @ApiOperation({ summary: 'Unsubscribe user' })
   @ApiBody({ type: EmailDto })
   @ApiResponse({
     status: 200,
-    description: 'User successfully unsubscribed from the newsletter',
+    description: 'User successfully unsubscribed',
   })
   public async unSubscribe(@Body() email: EmailDto) {
-    return await this.newsletterService.unsubscribe(email.email);
+    return await this.subscriberService.unsubscribe(email.email);
   }
 
   @IsPublic()
   @Post('resubscribe')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Resubscribe to newsletter' })
+  @ApiOperation({ summary: 'Resubscribe user' })
   @ApiBody({ type: EmailDto })
   @ApiResponse({
     status: 200,
-    description: 'User successfully resubscribed to the newsletter',
+    description: 'User successfully resubscribed',
   })
   public async reSubscribe(@Body() email: EmailDto) {
-    return await this.newsletterService.resubscribe(email.email);
+    return await this.subscriberService.resubscribe(email.email);
   }
 
   @Get('subscribers')
   @Roles(UserRole.ADMIN)
-  @ApiOperation({ summary: 'Get all newsletter subscribers (Admin only)' })
+  @ApiOperation({ summary: 'Get all subscribers (Admin only)' })
   @ApiResponse({
     status: 200,
-    description: 'Returns a list of all newsletter subscribers',
+    description: 'Returns a list of all subscribers',
   })
   @ApiBearerAuth()
   public async getAllSubscribers() {
-    return await this.newsletterService.getAllSubscribers();
+    return await this.subscriberService.getAllSubscribers();
   }
 
   private verifyMailchimpSignature(
@@ -165,12 +165,12 @@ export class NewsletterController {
         // Handle different webhook events
         switch (event) {
           case 'unsubscribe':
-            await this.newsletterService.setSubscriptionStatus(email, false);
+            await this.subscriberService.setSubscriptionStatus(email, false);
             console.log(`Unsubscribed: ${email}`);
             break;
 
           case 'subscribe':
-            await this.newsletterService.setSubscriptionStatus(email, true);
+            await this.subscriberService.setSubscriptionStatus(email, true);
             console.log(`Subscribed: ${email}`);
             break;
 

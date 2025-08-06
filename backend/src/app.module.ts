@@ -11,8 +11,10 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwtAuth.guard';
 import { RolesGuard } from './auth/guards/roles.guard';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
-import { NewsletterModule } from './newsletter/newsletter.module';
+import { SubscriberModule } from './subscribers/subscribers.module';
 import { MailchimpModule } from './mailchimp/mailchimp.module';
+import { ProductsModule } from './products/products.module';
+import { TransactionsModule } from './transactions/transactions.module';
 import mailchimpConfig from './mailchimp/config/mailchimpConfig';
 
 @Module({
@@ -43,8 +45,10 @@ import mailchimpConfig from './mailchimp/config/mailchimpConfig';
     }),
     EmailModule,
     CloudinaryModule,
-    NewsletterModule,
+    SubscriberModule,
     MailchimpModule,
+    ProductsModule,
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [

@@ -9,13 +9,13 @@ import {
 } from 'class-validator';
 
 export class ResetPasswordDto {
-  @IsNotEmpty()
-  @IsEmail()
-  @ApiProperty({
-    example: 'user email',
-    description: 'Email of the user',
-  })
-  email: string;
+  // @IsNotEmpty()
+  // @IsEmail()
+  // @ApiProperty({
+  //   example: 'user email',
+  //   description: 'Email of the user',
+  // })
+  // email: string;
 
   @IsNotEmpty()
   @IsString()

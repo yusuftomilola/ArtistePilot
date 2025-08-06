@@ -44,7 +44,7 @@ export class PasswordResetTokenProvider {
     await this.usersRepository.save(user);
 
     return {
-      token,
+      hashedToken,
       user,
     };
   }

@@ -3,9 +3,9 @@ POST http://localhost:4000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "firstName": "Yusuf",
-    "lastName": "Falade",
-    "email": "faladeyusuf54@gmail.com",
+    "firstName": "Maxwell",
+    "lastName": "Mohammed",
+    "email": "tomilolaaaaa@gmail.com",
     "password": "Adetomi.544$$"
 }
 
@@ -23,8 +23,7 @@ POST http://localhost:4000/api/v1/auth/verify-email
 Content-Type: application/json
 
 {
-    "token": "v6pvjsotzsfc3rat9zyxrs",
-    "userId": "0c6dd626-f9bb-47c3-9270-7c8187e82c07"
+    "token": "$2b$10$MXwoFJXIBrgj1FXwjb2aS./Xok.f/Juoh6e/4vzNY/jWXiyCD/yzq"
 }
 
 // RESEND VERIFICATION EMAIL
@@ -65,8 +64,7 @@ POST http://localhost:4000/api/v1/auth/reset-password
 Content-Type: application/json
 
 {
-    "email": "tomilolaaaaa@gmail.com",
-    "token": "b3ee64ffhbuih97kul284j",
+    "token": "$2b$10$KreLShqgaZGpnNA3zo0vdOW3uWL5DwLK3K0tYPluRL0.qlraDgXAu",
     "password": "Opeyemi.544$$"
 }
 

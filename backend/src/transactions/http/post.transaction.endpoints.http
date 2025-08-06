@@ -1,0 +1,8 @@
+// INITIALIZE A TRANSACTION
+POST http://localhost:4000/transactions/initialize
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYzZkZDYyNi1mOWJiLTQ3YzMtOTI3MC03YzgxODdlODJjMDciLCJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6ImZhbGFkZXl1c3VmNTRAZ21haWwuY29tIiwiaWF0IjoxNzU0NDc0NzM1LCJleHAiOjE3NTQ0NzgzMzUsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDAwMCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDAwMCJ9.00K6_4_VSg1E8Jt5OfpC3KCwnd0OmfOBHa_Rcd5dteM
+
+{
+    "productId": 2
+}
