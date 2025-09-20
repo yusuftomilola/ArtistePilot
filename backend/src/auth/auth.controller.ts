@@ -28,6 +28,7 @@ import { RefreshTokenDto } from './dto/refreshToken.dto';
 import { ForgotPasswordDto } from './dto/forgotPassword.dto';
 import { ResetPasswordDto } from './dto/resetPassword.dto';
 import { ChangePasswordDto } from './dto/changeUserPassword.dto';
+import { AuditAuth } from 'src/audit/decorators/audit.decorator';
 
 @Controller('api/v1/auth')
 @ApiTags('Auth')
@@ -36,6 +37,7 @@ export class AuthController {
 
   @IsPublic()
   @Post('register')
+  @AuditAuth('register')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Register a new user' })
   @ApiBody({ type: CreateUserDto })
@@ -46,6 +48,7 @@ export class AuthController {
 
   @IsPublic()
   @Post('login')
+  @AuditAuth('login')
   @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Login user' })
@@ -94,6 +97,7 @@ export class AuthController {
   }
 
   @Post('logout')
+  @AuditAuth('logout')
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Logout user' })
@@ -107,6 +111,7 @@ export class AuthController {
   }
 
   @Post('logout-all-sessions')
+  @AuditAuth('logout-all-sessions')
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Logout user from all sessions' })
@@ -139,6 +144,7 @@ export class AuthController {
   }
 
   @Post('change-password')
+  @AuditAuth('password_change')
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Change user password' })

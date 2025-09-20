@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EmailModule } from './email/email.module';
 import jwtConfig from './auth/config/jwtConfig';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwtAuth.guard';
 import { RolesGuard } from './auth/guards/roles.guard';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
@@ -15,7 +15,10 @@ import { SubscriberModule } from './subscribers/subscribers.module';
 import { MailchimpModule } from './mailchimp/mailchimp.module';
 import { ProductsModule } from './products/products.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { AuditModule } from './audit/audit.module';
 import mailchimpConfig from './mailchimp/config/mailchimpConfig';
+import { AuditInterceptor } from './audit/interceptors/audit.interceptor';
+import { AuthAuditInterceptor } from './audit/interceptors/auth-audit.interceptor';
 
 @Module({
   imports: [
@@ -49,6 +52,7 @@ import mailchimpConfig from './mailchimp/config/mailchimpConfig';
     MailchimpModule,
     ProductsModule,
     TransactionsModule,
+    AuditModule,
   ],
   controllers: [AppController],
   providers: [
@@ -60,6 +64,14 @@ import mailchimpConfig from './mailchimp/config/mailchimpConfig';
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AuditInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AuthAuditInterceptor,
     },
   ],
 })

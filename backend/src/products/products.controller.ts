@@ -14,6 +14,7 @@ import { UpdateProductDto } from './dto/updateProduct.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { UserRole } from 'src/auth/enums/roles.enum';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { IsPublic } from 'src/auth/decorators/public.decorator';
 
 @Controller('products')
 @ApiTags('Products')
@@ -32,5 +33,11 @@ export class ProductsController {
   @ApiBearerAuth()
   public async deleteProduct(@Param('id', ParseIntPipe) productId: number) {
     return await this.productsService.deleteProduct(productId);
+  }
+
+  @IsPublic()
+  @Get()
+  public async getProducts() {
+    return await this.productsService.getProducts();
   }
 }

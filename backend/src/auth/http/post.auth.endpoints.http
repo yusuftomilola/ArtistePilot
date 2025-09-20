@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "firstName": "Maxwell",
     "lastName": "Mohammed",
-    "email": "tomilolaaaaa@gmail.com",
+    "email": "tomilolaaaaayuuyfr@gmail.com",
     "password": "Adetomi.544$$"
 }
 
@@ -41,10 +41,9 @@ Content-Type: application/json
 // LOG OUT
 POST http://localhost:4000/api/v1/auth/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjkxMDYwZC1kYzM5LTQyYzEtYWE3NC0yMzA1ZjVmODBmNDEiLCJyb2xlIjoidXNlciIsImVtYWlsIjoidG9taWxvbGFhYWFhQGdtYWlsLmNvbSIsImlhdCI6MTc1MjI4NzExMiwiZXhwIjoxNzUyMjkwNzEyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.JXhpJmaC_2m8Fq9BC5ZSZjb_N8E61CH9tJ36SQjxWd8
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYzZkZDYyNi1mOWJiLTQ3YzMtOTI3MC03YzgxODdlODJjMDciLCJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6ImZhbGFkZXl1c3VmNTRAZ21haWwuY29tIiwiaWF0IjoxNzU2MDE5MjAxLCJleHAiOjE3NTYwMjI4MDEsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDAwMCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDAwMCJ9.3WK4Ab0-ZST8eC_wCISHXpMjz79YAuC5RUq5J_Q13k4
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYjkxMDYwZC1kYzM5LTQyYzEtYWE3NC0yMzA1ZjVmODBmNDEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc1MjI4NzExMiwiZXhwIjoxNzUyMzczNTEyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQwMDAifQ.ztq6oktfPxn0-d-HsXZOmu0Nht6AfIv1L71zTp6hdq8"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYzZkZDYyNi1mOWJiLTQ3YzMtOTI3MC03YzgxODdlODJjMDciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTYwMTkyMDEsImV4cCI6MTc1NjEwNTYwMSwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0MDAwIn0.b2BI4cPwwZj-3o56_kH_Co-0PbELDodaEXgibBbKbG4"
 }
 
 // LOG OUT ALL DEVICES/SESSIONS

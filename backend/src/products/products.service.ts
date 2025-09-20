@@ -62,4 +62,14 @@ export class ProductsService {
       throw new InternalServerErrorException('Failed to delete the product');
     }
   }
+
+  public async getProducts() {
+    const products = await this.productRepository.find();
+
+    if (!products) {
+      throw new NotFoundException('No products found');
+    }
+
+    return products;
+  }
 }
