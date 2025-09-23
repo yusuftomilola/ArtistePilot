@@ -35,11 +35,7 @@ export class RefreshTokensProvider {
     private readonly jwtConfiguration: ConfigType<typeof jwtConfig>,
   ) {}
 
-  public async refreshTokens(
-    userId: string,
-    refreshToken: string,
-    req: Request,
-  ) {
+  public async refreshTokens(userId: string, refreshToken: string) {
     const user = await this.usersService.findOneUserById(userId);
 
     // find all the tokens of the user in the database
@@ -121,7 +117,6 @@ export class RefreshTokensProvider {
       return {
         user,
         accessToken: newAccessToken,
-        refreshToken,
       };
     }
 
